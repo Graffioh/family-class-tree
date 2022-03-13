@@ -5,6 +5,7 @@
 #include "person.cpp" // We don't need to include this normally, but now we don't have .o files (created by makefiles)
 #include "familytree.h"
 #include "familytree.cpp"
+#include "inputValidation.h"
 
 /*
     Family Tree Creator - Create a class called Person which will have a name, when they were born and when (and if) they died. 
@@ -67,35 +68,26 @@ void creaPersone(Person& person1)
     int b_day,b_month,b_year; // birth date
     int d_day,d_month,d_year; // death date
 
-    std::cout << "Insert name: ";
-    std::cin >> name;
-    std::cout << "Insert day of birth: " << std::endl;
-    std::cin >> b_day;
-    std::cout << "Insert month of birth: " << std::endl;
-    std::cin >> b_month;
-    std::cout << "Insert year of birth: " << std::endl;
-    std::cin >> b_year;
-
+    getInput(name, "Insert name: ");
+    getInput(b_day,  "Insert day of birth: ");
+    getInput(b_month, "Insert month of birth: ");
+    getInput(b_year, "Insert year of birth: ");
 
     char c;
-    std::cout << "Is this person dead? Yes(y) or Not(n), If yes insert death date: ";
-    std::cin >> c;
+    getInput(c, "Is this person dead? Yes(y) or Not(n), If yes insert death date: ");
 
     if(c == 'y')
     {
-        std::cout << "Insert day of decease: " << std::endl;
-        std::cin >> d_day;
-        std::cout << "Insert month of decease: " << std::endl;
-        std::cin >> d_month;
-        std::cout << "Insert year of decease: " << std::endl;
-        std::cin >> d_year;
+        getInput(d_day, "Insert day of decease: ");
+        getInput(d_month, "Insert month of decease: ");
+        getInput(d_year, "Insert year of decease: ");
 
         person1 = Person(name, b_day, b_month, b_year, d_day, d_month, d_year);
         //Person persona1(name, b_day, b_month, b_year, d_day, d_month, d_year); //error: declaration of 'Person persona1' shadows a parameter: name
         return;
     }
 
-    person1 = Person(name, b_day, b_month, b_year);
+    person1 = Person(name, b_day, b_month, b_year);  
 
 }
 
@@ -105,3 +97,5 @@ void printMenu(int& input)
     std::cout << "=== Welcome to the People Maker ===\nInsert 1 to create a new person\n,Insert 2 to stamp the family tree\n,Insert 0 to exit\nSelection: ";
     std::cin >> input;
 }
+
+
